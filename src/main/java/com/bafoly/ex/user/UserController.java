@@ -1,5 +1,25 @@
 package com.bafoly.ex.user;
 
+import com.bafoly.ex.error.ApiError;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController("/users")
+@AllArgsConstructor
 public class UserController {
-  
+
+    private final UserService userService;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUser(@PathVariable long id) {
+        try {
+            return ResponseEntity.ok(this.userService.getUserById(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ApiError(400, "User not found!", "/users/" + id));
+        }
+    }
+
 }
