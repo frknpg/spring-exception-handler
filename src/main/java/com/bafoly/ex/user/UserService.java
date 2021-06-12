@@ -1,10 +1,10 @@
 package com.bafoly.ex.user;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
